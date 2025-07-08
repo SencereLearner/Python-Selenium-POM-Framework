@@ -18,4 +18,4 @@ class BasePage:
         return self.driver.find_element(*locator)
 
     def find_all(self, locator: tuple):
-        return self.driver.find_element(*locator)
+        return self.driver.find_elements(*locator)
