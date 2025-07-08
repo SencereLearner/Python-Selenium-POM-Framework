@@ -1,12 +1,14 @@
 from pages.base_page import BasePage
 from pages.locators import login_locators as loc
 from selenium.webdriver.support.wait import WebDriverWait
+import allure
 from utils.wait_helpers import wait_for_text
 
 class LoginPage(BasePage):
 
     page_url = '/customer/account/login'
 
+    @allure.step("Filling in login form with email and password")
     def fill_login_form(self, login, password):
         email_field = self.find(loc.email_field_loc)
         password_field = self.find(loc.password_field_loc)
@@ -15,6 +17,7 @@ class LoginPage(BasePage):
         password_field.send_keys(password)
         button.click()
 
+    @allure.step("Verifying alert message is correct")
     def check_error_alert_text_is(self, text):
         wait_for_text(self.driver, loc.error_locator)
         error_alert = self.driver.find_element(*loc.error_locator)
