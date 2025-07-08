@@ -3,7 +3,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 import pytest
 from pages.sale_page import SalePage
-from pages.login_page import CustomerLogin
+from pages.login_page import LoginPage
 
 
 @pytest.fixture()
@@ -20,7 +20,7 @@ def driver():
 
 @pytest.fixture()
 def login_page(driver):
-    return CustomerLogin(driver)
+    return LoginPage(driver)
 
 @pytest.fixture()
 def sale_page(driver):

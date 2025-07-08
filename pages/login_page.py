@@ -1,9 +1,9 @@
 from pages.base_page import BasePage
 from pages.locators import login_locators as loc
 from selenium.webdriver.support.wait import WebDriverWait
-from utils import project_ec
+from utils.wait_helpers import wait_for_text
 
-class CustomerLogin(BasePage):
+class LoginPage(BasePage):
 
     page_url = '/customer/account/login'
 
@@ -16,6 +16,6 @@ class CustomerLogin(BasePage):
         button.click()
 
     def check_error_alert_text_is(self, text):
-        WebDriverWait(self.driver, 5).until(project_ec.text_is_not_empty_in_element(loc.error_locator))
+        wait_for_text(self.driver, loc.error_locator)
         error_alert = self.driver.find_element(*loc.error_locator)
         assert error_alert.text == text
