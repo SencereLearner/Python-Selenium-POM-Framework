@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 import pytest
+
+from pages.gear import GearPage
 from pages.sale_page import SalePage
 from pages.login_page import LoginPage
 
@@ -9,7 +11,7 @@ from pages.login_page import LoginPage
 @pytest.fixture()
 def driver():
     options = Options()
-    options.add_argument("--headless")
+    # options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     service = Service() # closes Webdriver
@@ -25,3 +27,7 @@ def login_page(driver):
 @pytest.fixture()
 def sale_page(driver):
     return SalePage(driver)
+
+@pytest.fixture()
+def gear_page(driver):
+    return GearPage(driver)
