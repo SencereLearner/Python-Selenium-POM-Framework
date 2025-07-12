@@ -1,8 +1,10 @@
 import allure
 import pytest
+from pages.base_page import BasePage
 from utils.wait_helpers import wait_for_element_visibility
 
 
+@BasePage.log_time
 @allure.title("Check shopping category opens correct url")
 @allure.severity(allure.severity_level.MINOR)
 @pytest.mark.temp_test

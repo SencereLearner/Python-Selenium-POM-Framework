@@ -1,3 +1,6 @@
+import functools
+from time import time
+
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
@@ -26,3 +29,14 @@ class BasePage:
 
     def find_all(self, locator: tuple):
         return self.driver.find_elements(*locator)
+
+    @staticmethod
+    def log_time(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            start = time()
+            result = func(*args, **kwargs)
+            duration = time() - start
+            print(f"{func.__name__} executed in {duration:.2f}s")
+            return result
+        return wrapper
