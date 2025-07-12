@@ -1,10 +1,11 @@
 import pytest
 import allure
 
+LOGIN_ERROR = "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."
 
 test_data = [
-    ("incorrect@test.com", "wrongpass", "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."),
-    ("existint@email.com", "non-existing-pass", "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."),
+    ("incorrect@test.com", "wrongpass", LOGIN_ERROR),
+    ("existint@email.com", "non-existing-pass", LOGIN_ERROR),
 ]
 
 
@@ -20,11 +21,11 @@ def test_login_errors(login_page, email, password, expected_error):
 @allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.smoke
 def test_incorrect_login(login_page):
+    # kwargs keys MUST match exact method parameter names: def fill_login_form(self, login, password):
+    credentials = {"login": "user@test.com", "password": "badpass"}
     login_page.open_page()
-    login_page.fill_login_form('incorrect@test.com', 'incorrectPass')
-    login_page.check_error_alert_text_is(
-        'The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.'
-    )
+    login_page.fill_login_form(**credentials)
+    login_page.check_error_alert_text_is(LOGIN_ERROR)
 
 @allure.title("Check correct email with incorrect password error message")
 @allure.severity(allure.severity_level.CRITICAL)
@@ -32,6 +33,4 @@ def test_incorrect_login(login_page):
 def test_correct_email_with_incorrect_pass(login_page):
     login_page.open_page()
     login_page.fill_login_form('existint@email.com', 'non-existing-pass')
-    login_page.check_error_alert_text_is(
-        'The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.'
-    )
+    login_page.check_error_alert_text_is(LOGIN_ERROR)
