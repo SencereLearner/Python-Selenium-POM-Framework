@@ -1,12 +1,13 @@
 from pages.base_page import BasePage
 from pages.locators import login_locators as loc
-from selenium.webdriver.support.wait import WebDriverWait
+import pytest
 import allure
 from utils.wait_helpers import wait_for_text
 
 class LoginPage(BasePage):
 
     page_url = '/customer/account/login'
+
 
     @allure.step("Filling in login form with email and password")
     def fill_login_form(self, login, password):
