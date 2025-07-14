@@ -19,7 +19,7 @@ class BasePage:
         if self.page_url:
             self.driver.get(f'{self.base_url}/{self.page_url}')
         else:
-            raise NotImplementedError('Can not open the page')
+            raise NotImplementedError('Unable to open the page')
 
     def get_current_url(self):
         return self.driver.current_url
