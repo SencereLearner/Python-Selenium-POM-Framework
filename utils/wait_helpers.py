@@ -12,7 +12,6 @@ def text_is_not_empty_in_element(locator):
             return False
     return _predicate
 
-
 def wait_for_text(driver, locator: tuple, timeout=10):
     return WebDriverWait(driver, timeout).until(
         lambda d: d.find_element(*locator).text.strip() != '') # Checks that the resulting string is not empty

@@ -37,3 +37,5 @@ def sale_page(driver):
 @pytest.fixture()
 def gear_page(driver):
     return GearPage(driver)
+
+# to run the tests: pytest -m temp_test -s or pytest -m-s
