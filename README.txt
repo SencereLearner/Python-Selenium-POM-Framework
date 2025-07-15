@@ -3,7 +3,7 @@ Python with Selenium Page Object Model framework project.
 Techniques used during the setup:
 
 1. Requirements.txt (for saving all the modules used in the project)
-2. Conftest fixtures
+2. Pytest fixtures
 3. Chrome Options() and Service() (to pre-configure browser and webdriver behaviour)
 4. Yield (to act as tearDown aka post condition)
 5. Pytest.ini (for CLI configuration and tests groupings)
@@ -18,3 +18,4 @@ Techniques used during the setup:
 14. List, Tuple, Dict / *Args and **Kwargs (to store and unpack data)
 15. Match case statement
 16. List comprehension
+17. .env file (to hide sensitive data)

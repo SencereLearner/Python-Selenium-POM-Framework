@@ -1,17 +1,18 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-import pytest
-import os
 from pages.gear_page import GearPage
 from pages.sale_page import SalePage
 from pages.login_page import LoginPage
+from dotenv import load_dotenv
+import os
+import pytest
 
 
 @pytest.fixture()
 def driver():
     options = Options()
-    options.add_argument("--headless")
+    # options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     # disables a browser feature that tells websites "I'm being controlled by automation"
@@ -37,5 +38,16 @@ def sale_page(driver):
 @pytest.fixture()
 def gear_page(driver):
     return GearPage(driver)
+
+
+load_dotenv()
+
+@pytest.fixture
+def valid_sensitive_creds():
+    print("Email from env:", os.getenv("VALID_EMAIL")) # to make sure .env loads correctly and has the data
+    return {
+        "login": os.getenv("VALID_EMAIL"),
+        "password": os.getenv("VALID_PASS")
+    }
 
 # to run the tests: pytest -m temp_test -s or pytest -m-s

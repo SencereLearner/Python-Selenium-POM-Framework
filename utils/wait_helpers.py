@@ -1,8 +1,7 @@
-import time
 from typing import Tuple
-
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
 
 def text_is_not_empty_in_element(locator):
     def _predicate(driver):

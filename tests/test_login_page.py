@@ -1,7 +1,7 @@
 import pytest
 import allure
 from pages.base_page import BasePage
-
+import utils.wait_helpers
 
 LOGIN_ERROR = "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."
 
@@ -10,6 +10,14 @@ test_data = [
     ("existint@email.com", "non-existing-pass", LOGIN_ERROR),
 ]
 
+@BasePage.log_time
+@allure.title("Check successful login")
+@allure.severity(allure.severity_level.CRITICAL)
+def test_successful_login(login_page, valid_sensitive_creds):
+    login_page.open_page()
+    login_page.fill_login_form(**valid_sensitive_creds)
+    utils.wait_helpers.wait_for_element_visibility(login_page.driver, login_page.header_title_loc)
+    assert login_page.find(login_page.header_title_loc).text.lower() == "my account"
 
 @BasePage.log_time
 @allure.title("Check login error message with parametrized test data")
