@@ -1,3 +1,4 @@
+import time
 from typing import Tuple
 
 from selenium.webdriver.support.ui import WebDriverWait

@@ -5,7 +5,7 @@ from utils.wait_helpers import wait_for_element_visibility
 
 
 @BasePage.log_time
-@allure.title("Check shopping category opens correct url")
+@allure.title("Check shopping category opens correct url and Verify specific watch name")
 @allure.severity(allure.severity_level.MINOR)
 @pytest.mark.temp_test
 def test_clicking_shopping_category(gear_page):
@@ -13,3 +13,4 @@ def test_clicking_shopping_category(gear_page):
     gear_page.click_shopping_category("watches")
     wait_for_element_visibility(gear_page.driver, gear_page.header_title_loc)
     assert gear_page.get_current_url() == "https://magento.softwaretestingboard.com/gear/watches.html"
+    gear_page.verify_specific_watch_name('bolo sport watch')

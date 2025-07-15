@@ -3,7 +3,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 import pytest
 import os
-from pages.gear import GearPage
+from pages.gear_page import GearPage
 from pages.sale_page import SalePage
 from pages.login_page import LoginPage
 

@@ -1,14 +1,24 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
-
+import allure
 
 class GearPage(BasePage):
 
     page_url = '/gear.html'
+    all_available_watches = (By.XPATH, "//img[@class='product-image-photo']")
+
+    @allure.step(f"Navigating to a webpage")
+    def open_page(self):
+        self.driver.get(f"{self.base_url}/{self.page_url}")
 
     def click_shopping_category(self, shopping_category: str):
         shopping_category_element = (By.XPATH, f"//li[@class='item']/a[contains(@href, '/gear/{shopping_category.lower()}.html')]")
         self.find(shopping_category_element).click()
+
+    def verify_specific_watch_name(self, bag_name):
+        all_bags = self.find_all(self.all_available_watches)
+        formatted_bags_names = [x.get_attribute("alt").strip().lower() for x in all_bags]
+        assert bag_name.lower() in formatted_bags_names, f"Bag name: '{bag_name}' is not found in the list of bags: {formatted_bags_names}"
 
     category_links = {
         "bags": (By.XPATH, "//li[@class='item']/a[contains(@href, '/gear/bags.html')]"),

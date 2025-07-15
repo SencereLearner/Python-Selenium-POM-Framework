@@ -36,7 +36,7 @@ def test_incorrect_login(login_page):
 @BasePage.log_time
 @allure.title("Check correct email with incorrect password error message")
 @allure.severity(allure.severity_level.CRITICAL)
-@pytest.mark.temp_test
+@pytest.mark.smoke
 def test_correct_email_with_incorrect_pass(login_page):
     login_page.open_page()
     login_page.fill_login_form('existint@email.com', 'non-existing-pass')

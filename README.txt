@@ -10,9 +10,11 @@ Techniques used during the setup:
 6. Allure (for recording and reporting test results outputs)
 7. POM (each web page is a separate class which keeps all the corresponding data)
 8. Inheritance (to use BaseClass content on each of the child classes)
-9. List, Tuple, Dict / *Args and **Kwargs (to store and unpack data)
-10. Decorator (to use on any test function for recording test execution time)
+9. Abstraction (using @absractmethod in base_class to be forced on each child class)
+10. Decorators (to use on any test function for recording test execution time)
 11. Def __init__ (to indicate required data upon creation an object of the class)
 12. Custom WebDriverWait(s)
 13. Pytest framework (used for Fixture support and Parameterized testing)
-14.
+14. List, Tuple, Dict / *Args and **Kwargs (to store and unpack data)
+15. Match case statement
+16. List comprehension

@@ -1,11 +1,15 @@
-from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 import allure
 
 
-
 class SalePage(BasePage):
+
+
     page_url = '/sale.html'
+
+    @allure.step("Navigating to a webpage")
+    def open_page(self):
+        self.driver.get(f"{self.base_url}/{self.page_url}")
 
     @allure.step("Verifying page header title is correct")
     def check_page_header_title_is(self, text):

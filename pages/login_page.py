@@ -1,13 +1,16 @@
 from pages.base_page import BasePage
 from pages.locators import login_locators as loc
-import pytest
 import allure
 from utils.wait_helpers import wait_for_text
+
 
 class LoginPage(BasePage):
 
     page_url = '/customer/account/login'
 
+    @allure.step("Navigating to a webpage")
+    def open_page(self):
+        self.driver.get(f"{self.base_url}/{self.page_url}")
 
     @allure.step("Filling in login form with email and password")
     def fill_login_form(self, login, password):
