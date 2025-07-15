@@ -1,32 +1,48 @@
 import functools
 from time import time
 from abc import ABC, abstractmethod
+from typing import List
+
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
 
 
 class BasePage:
 
-    base_url = 'https://magento.softwaretestingboard.com'
-    header_title_loc = (By.TAG_NAME, 'h1')
+    _base_url = 'https://magento.softwaretestingboard.com'
+    _header_title_loc = (By.TAG_NAME, 'h1')
 
 
     def __init__(self, driver: WebDriver):
-        self.driver = driver
+        self._driver = driver
 
 
     @abstractmethod
     def open_page(self):
         pass
 
-    def get_current_url(self):
-        return self.driver.current_url
+    @property
+    def current_url(self) -> str:
+        return self._driver.current_url
 
-    def find(self, locator: tuple):
-        return self.driver.find_element(*locator)
+    @property
+    def page_title(self) -> str:
+        return self._driver.title
 
-    def find_all(self, locator: tuple):
-        return self.driver.find_elements(*locator)
+    @property
+    def header_text(self) -> str:
+        return self.find(self._header_title_loc).text
+
+    def find(self, locator: tuple) -> WebElement:
+        return self._driver.find_element(*locator)
+
+    def find_all(self, locator: tuple) -> List[WebElement]:
+        return self._driver.find_elements(*locator)
+
+    def check_page_header_title_is(self, expected_text: str):
+        actual_text = self.find(self._header_title_loc).text
+        assert actual_text == expected_text, f"Expected header: '{expected_text}', but got: '{actual_text}'"
 
     # turns a method into a static method, not requiring self as its first parameter and doesn’t need access to the instance or class at all
     # used it here to not require self as the decorator could be used for both methods or functions

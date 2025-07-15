@@ -7,7 +7,7 @@ LOGIN_ERROR = "The account sign-in was incorrect or your account is disabled tem
 
 test_data = [
     ("incorrect@test.com", "wrongpass", LOGIN_ERROR),
-    ("existint@email.com", "non-existing-pass", LOGIN_ERROR),
+    ("existing@email.com", "non-existing-pass", LOGIN_ERROR),
 ]
 
 @BasePage.log_time
@@ -16,8 +16,9 @@ test_data = [
 def test_successful_login(login_page, valid_sensitive_creds):
     login_page.open_page()
     login_page.fill_login_form(**valid_sensitive_creds)
-    utils.wait_helpers.wait_for_element_visibility(login_page.driver, login_page.header_title_loc)
-    assert login_page.find(login_page.header_title_loc).text.lower() == "my account"
+    utils.wait_helpers.wait_for_element_visibility(login_page._driver, login_page._header_title_loc)
+    assert login_page.find(login_page._header_title_loc).text.lower() == "my account"
+    assert login_page.header_text.lower() == "my account"
 
 @BasePage.log_time
 @allure.title("Check login error message with parametrized test data")

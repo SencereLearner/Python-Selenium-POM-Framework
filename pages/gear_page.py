@@ -9,7 +9,7 @@ class GearPage(BasePage):
 
     @allure.step(f"Navigating to a webpage")
     def open_page(self):
-        self.driver.get(f"{self.base_url}/{self.page_url}")
+        self._driver.get(f"{self._base_url}/{self.page_url}")
 
     def click_shopping_category(self, shopping_category: str):
         shopping_category_element = (By.XPATH, f"//li[@class='item']/a[contains(@href, '/gear/{shopping_category.lower()}.html')]")

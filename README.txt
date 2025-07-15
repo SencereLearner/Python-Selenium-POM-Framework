@@ -19,3 +19,5 @@ Techniques used during the setup:
 15. Match case statement
 16. List comprehension
 17. .env file (to hide sensitive data)
+18. Protected variables
+19. @Properties (for cleaner code)
