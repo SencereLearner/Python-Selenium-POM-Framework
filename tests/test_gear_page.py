@@ -7,7 +7,7 @@ import utils.wait_helpers
 @BasePage.log_time
 @allure.title("Check shopping category opens correct url and Verify specific watch name")
 @allure.severity(allure.severity_level.MINOR)
-@pytest.mark.additional_test
+@pytest.mark.extended
 def test_clicking_shopping_category(gear_page):
     gear_page.open_page()
     gear_page.click_shopping_category("watches")

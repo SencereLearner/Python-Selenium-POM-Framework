@@ -34,16 +34,6 @@ def driver(request):
     driver.quit()
 
 
-# # Register test outcome to be used in the fixture
-# @pytest.hookimpl(tryfirst=True, hookwrapper=True)
-# def pytest_runtest_makereport(item, call):
-#     # Execute all other hooks to get the report object
-#     outcome = yield
-#     rep = outcome.get_result()
-#     # Set a report attribute for each phase of a call (setup, call, teardown)
-#     setattr(item, f"rep_{rep.when}", rep)
-
-
 @pytest.fixture()
 def login_page(driver):
     return LoginPage(driver)
